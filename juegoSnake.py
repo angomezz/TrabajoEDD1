@@ -1,5 +1,6 @@
 import turtle
 import time
+import random
 
 POSPONER = 0.1
 
@@ -19,6 +20,28 @@ cabeza.penup()
 cabeza.goto(0,0)
 cabeza.direction = "stop"
 cabeza.color("pink")
+
+#Manzanas para la serpiente
+manzana = turtle.Turtle()
+manzana.speed(0)
+manzana.shape("circle")
+manzana.shapesize(stretch_wid=2, stretch_len=2) 
+manzana.penup()
+manzana.goto(100,150)
+manzana.color("red")
+
+#Cuerpo de la serpiente
+cuerpo = []
+for i in range(1,3):
+    cuadro = turtle.Turtle()
+    cuadro.speed(0)
+    cuadro.shape("square")
+    cuadro.shapesize(stretch_wid=2, stretch_len=2) 
+    cuadro.penup()
+    cuadro.goto(0,-40*i)
+    cuadro.direction = "stop"
+    cuadro.color("pink")
+    cuerpo.append(cuadro)
 
 #Funciones para la direccion
 def arriba():
@@ -61,6 +84,34 @@ ventana.onkeypress(izquierda, "Left")
 #Bucle principal
 while True:
     ventana.update()
+
+    if cabeza.direction != "stop":
+        #Interraccion de la serpiente con las manzanas
+        if cabeza.distance(manzana) < 40:
+            x = random.randint(-240,240)
+            y = random.randint(-240,240)
+            
+            manzana.goto(x,y)
+
+            ncuadro = turtle.Turtle()
+            ncuadro.speed(0)
+            ncuadro.shape("square")
+            ncuadro.shapesize(stretch_wid=2, stretch_len=2) 
+            ncuadro.penup()
+            ncuadro.color("pink")
+            cuerpo.append(ncuadro)
+            
+        #Movimiento del cuerpo de la serpiente
+        cuadros = len(cuerpo)
+        for i in range(cuadros-1, 0, -1):
+            x = cuerpo[i-1].xcor()
+            y = cuerpo[i-1].ycor()
+            cuerpo[i].goto(x,y)
+
+        if cuadros>0:
+            x = cabeza.xcor()
+            y = cabeza.ycor()
+            cuerpo[0].goto(x,y)
 
     mov()
     time.sleep(POSPONER)
