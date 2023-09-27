@@ -64,16 +64,20 @@ for i in range(1,3):
 
 #Funciones para la direccion
 def arriba():
-    cabeza.direction = "up"
+    if cabeza.direction != "down":
+        cabeza.direction = "up"
 
 def abajo():
-    cabeza.direction = "down"
+    if cabeza.direction != "up":
+        cabeza.direction = "down"
 
 def derecha():
-    cabeza.direction = "right"
+    if cabeza.direction != "left":
+        cabeza.direction = "right"
 
 def izquierda():
-    cabeza.direction = "left"
+    if cabeza.direction != "right":
+        cabeza.direction = "left"
 
 #Funciones para el movimiento
 def mov():
