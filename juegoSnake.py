@@ -30,6 +30,25 @@ manzana.penup()
 manzana.goto(100,150)
 manzana.color("red")
 
+#Ubicacion manzana
+def ubicarManzana():
+    while True:
+        x = random.randint(-240,240)
+        y = random.randint(-240,240)
+        sobrep = False
+
+        if cabeza.distance(x,y) <= 40:
+            continue
+        for cuadro in cuerpo:
+            if cuadro.distance(x,y) <= 40:
+                sobrep = True
+                break
+        if sobrep:
+            continue
+        else:
+            manzana.goto(x,y)
+            break
+
 #Cuerpo de la serpiente
 cuerpo = []
 for i in range(1,3):
@@ -97,7 +116,7 @@ while True:
             s.goto(2000,2000)
         #Eliminar de la lista
         cuerpo.clear()
-        
+
         for i in range(1,3):
                 cuadro = turtle.Turtle()
                 cuadro.speed(0)
@@ -112,10 +131,7 @@ while True:
     if cabeza.direction != "stop":
         #Interraccion de la serpiente con las manzanas
         if cabeza.distance(manzana) < 40:
-            x = random.randint(-240,240)
-            y = random.randint(-240,240)
-            
-            manzana.goto(x,y)
+            ubicarManzana()
 
             ncuadro = turtle.Turtle()
             ncuadro.speed(0)
