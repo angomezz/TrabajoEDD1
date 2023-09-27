@@ -147,7 +147,7 @@ def juego():
 
     def abajo():
         global contador_movimientos
-        if cabeza.direction != "up":
+        if cabeza.direction != "up" and cabeza.direction != "stop":
             cabeza.direction = "down"
             incrementar_contador()
 
@@ -254,7 +254,7 @@ def juego():
 
 
         #Colisiones con el cuerpo de la serpiente
-        for c in cuerpo:
+        for c in list(cuerpo):
             if c.distance(cabeza) < 40:
                 time.sleep(0.5)
                 cabeza.goto(0,0)
