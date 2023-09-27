@@ -6,6 +6,7 @@ from collections import deque
 import tkinter as tk
 
 POSPONER = 0.1
+contador_movimientos = 0
 
 #Funcion para la ventana de informacion general
 def informacion():    
@@ -50,7 +51,7 @@ def informacion():
 def mensaje_gameOver():
     # Crear la ventana
     lose = tk.Toplevel()
-    lose.title("Mensaje de final") 
+    lose.title("Mensaje de Game Over") 
     lose.config(background="red")
 
     # Obtener el tamaño de la pantalla
@@ -97,6 +98,11 @@ def juego():
     manzana.goto(100,150)
     manzana.color("red")
 
+    # Función para incrementar el contador de movimientos
+    def incrementar_contador():
+        global contador_movimientos
+        contador_movimientos = (contador_movimientos % 10) + 1  # Reinicia a 1 cuando llega a 10
+
     #Ubicacion manzana
     def ubicarManzana():
         while True:
@@ -114,7 +120,9 @@ def juego():
                 continue
             else:
                 manzana.goto(x,y)
+                manzana.showturtle()                
                 break
+
 
     #Cuerpo de la serpiente
     cuerpo = deque()
@@ -131,27 +139,37 @@ def juego():
 
     #Funciones para la direccion
     def arriba():
+        global contador_movimientos
+
         if cabeza.direction != "down":
             cabeza.direction = "up"
+            incrementar_contador()
 
     def abajo():
+        global contador_movimientos
         if cabeza.direction != "up":
             cabeza.direction = "down"
+            incrementar_contador()
 
     def derecha():
+        global contador_movimientos
         if cabeza.direction != "left":
             cabeza.direction = "right"
+            incrementar_contador()
 
     def izquierda():
+        global contador_movimientos
         if cabeza.direction != "right":
             cabeza.direction = "left"
+            incrementar_contador()
 
     #Funciones para el movimiento
-    def mov():
+    def mov():        
+
         if cabeza.direction == "up":
             y = cabeza.ycor()
             cabeza.sety(y + 40)
-
+            
         if cabeza.direction == "down":
             y = cabeza.ycor()
             cabeza.sety(y - 40)
@@ -163,6 +181,7 @@ def juego():
         if cabeza.direction == "left":
             x = cabeza.xcor()
             cabeza.setx(x - 40)
+    
 
     #Configuracion del teclado
     ventana.listen()
@@ -203,9 +222,11 @@ def juego():
                     cuerpo.append(cuadro)
 
         if cabeza.direction != "stop":
-            #Interraccion de la serpiente con las manzanas
-            if cabeza.distance(manzana) < 40:
-                ubicarManzana()
+            aleatorio=0
+            #Interraccion de la serpiente con las manzanas            
+            if cabeza.distance(manzana) < 40 :
+                manzana.hideturtle()
+                aleatorio = random.randint(1, 10)
 
                 ncuadro = turtle.Turtle()
                 ncuadro.speed(0)
@@ -224,8 +245,13 @@ def juego():
             c = cuerpo.popleft()
             cuerpo.append(c)
             c.goto(x,y)
+        
+            if contador_movimientos == aleatorio:
+                ubicarManzana()
 
         mov()
+        print("Contador de movimientos:", contador_movimientos)
+
 
         #Colisiones con el cuerpo de la serpiente
         for c in cuerpo:
@@ -259,5 +285,5 @@ def juego():
     #Funcion para ejecutar la ventana
     ventana.mainloop()
 
-informacion()
+#informacion()
 juego()
