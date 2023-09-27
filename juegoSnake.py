@@ -7,20 +7,12 @@ from tkinter import messagebox
 
 POSPONER = 0.1
 
-
-def mostrar_ventana_personalizada():
-    ventana_personalizada = tk.Toplevel()
-    ventana_personalizada.title("Ventana Personalizada")
-    ventana_personalizada.configure(bg="red")  # Cambiar el color de fondo a rojo
-
-    label = tk.Label(ventana_personalizada, text="Contenido de la ventana personalizada", font=("Arial", 12), bg="red", fg="white")
-    label.pack(pady=20)
-
 #Funcion para la ventana de informacion general
 def informacion():    
     # Crear la ventana
     info = tk.Tk()
-    info.title("Informacion general")    
+    info.title("Informacion general")   
+    info.config(background="khaki") 
 
     # Obtener el tamaño de la pantalla
     anchoPantalla = info.winfo_screenwidth()
@@ -35,15 +27,21 @@ def informacion():
 
     # Crear un título
     titulo = tk.Label(info, text="Juego Snake Master 4.0 :) ", font=("Arial", 18))
-    titulo.pack(pady=10)
+    titulo.pack(pady=25) 
+    titulo.config(background="skyblue2") 
 
     # Crear un párrafo de texto
     texto = """
-    Este es un párrafo de ejemplo.
-    Aquí puedes escribir tu texto y descripciones.
+    ▶ Controles: las fechas del teclado  ← → ↑ ↓
+
+    ▶ Para inciar con el juego cierra esta ventana 
+    dando clic en la ✘ superior
+
+    !Come la mayor cantidad de frijolitos que puedas¡
     """
     parrafo = tk.Label(info, text=texto, font=("Arial", 12), justify="left")
-    parrafo.pack(pady=10)
+    parrafo.pack(pady=10) 
+    parrafo.config(background="khaki") 
 
     # Iniciar el bucle principal de la ventana
     info.mainloop()
@@ -189,8 +187,8 @@ def juego():
             #Eliminar de la lista
             cuerpo.clear()
 
+            #Muestra el mensaje de que perdio el juego
             mensaje_gameOver()
-
             
             for i in range(1,3):
                     cuadro = turtle.Turtle()
@@ -243,6 +241,9 @@ def juego():
                     k.goto(2000,2000)
                     
                 cuerpo.clear()
+                #Muestra el mensaje de que perdio el juego
+                mensaje_gameOver()
+
                 for i in range(1,3):
                     cuadro = turtle.Turtle()
                     cuadro.speed(0)
@@ -259,5 +260,5 @@ def juego():
     #Funcion para ejecutar la ventana
     ventana.mainloop()
 
-#informacion()
+informacion()
 juego()
