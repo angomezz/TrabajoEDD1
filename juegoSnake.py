@@ -8,9 +8,16 @@ from tkinter import messagebox
 POSPONER = 0.1
 
 
+def mostrar_ventana_personalizada():
+    ventana_personalizada = tk.Toplevel()
+    ventana_personalizada.title("Ventana Personalizada")
+    ventana_personalizada.configure(bg="red")  # Cambiar el color de fondo a rojo
+
+    label = tk.Label(ventana_personalizada, text="Contenido de la ventana personalizada", font=("Arial", 12), bg="red", fg="white")
+    label.pack(pady=20)
+
 #Funcion para la ventana de informacion general
-def informacion():
-    
+def informacion():    
     # Crear la ventana
     info = tk.Tk()
     info.title("Informacion general")    
@@ -42,8 +49,27 @@ def informacion():
     info.mainloop()
 
 #Funcion para el mensaje de GAME OVER
-def gameOver():
-    pass
+def mensaje_gameOver():
+    # Crear la ventana
+    lose = tk.Toplevel()
+    lose.title("Mensaje de final") 
+    lose.config(background="red")
+
+    # Obtener el tamaño de la pantalla
+    anchoPantalla = lose.winfo_screenwidth()
+    altoPantalla = lose.winfo_screenheight()
+
+    # Calcular las coordenadas para centrar la ventana
+    x = (anchoPantalla - 300) // 2  # Ancho de la ventana
+    y = (altoPantalla - 200) // 2   # Alto de la ventana
+    
+    
+    lose.geometry("300x200+{}+{}".format(x, y))
+
+    # Crear un título
+    mensaje = tk.Label(lose, text="Game Over :( ", font=("Arial", 23) )
+    mensaje.pack(pady=60)      
+    mensaje.config(background="red", fg="white")
 
 def juego():
     #Configuracion de la ventana principal
@@ -163,6 +189,9 @@ def juego():
             #Eliminar de la lista
             cuerpo.clear()
 
+            mensaje_gameOver()
+
+            
             for i in range(1,3):
                     cuadro = turtle.Turtle()
                     cuadro.speed(0)
@@ -230,5 +259,5 @@ def juego():
     #Funcion para ejecutar la ventana
     ventana.mainloop()
 
-informacion()
+#informacion()
 juego()
