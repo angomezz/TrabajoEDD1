@@ -3,7 +3,6 @@ import time
 import random
 
 import tkinter as tk
-from tkinter import messagebox
 
 POSPONER = 0.1
 
@@ -69,6 +68,7 @@ def mensaje_gameOver():
     mensaje.pack(pady=60)      
     mensaje.config(background="red", fg="white")
 
+#Funcion que ejecuta el juego
 def juego():
     #Configuracion de la ventana principal
     ventana = turtle.Screen()
