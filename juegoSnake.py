@@ -19,7 +19,7 @@ cabeza.shapesize(stretch_wid=2, stretch_len=2)
 cabeza.penup()
 cabeza.goto(0,0)
 cabeza.direction = "stop"
-cabeza.color("pink")
+cabeza.color("green4")
 
 #Manzanas para la serpiente
 manzana = turtle.Turtle()
@@ -40,7 +40,7 @@ for i in range(1,3):
     cuadro.penup()
     cuadro.goto(0,-40*i)
     cuadro.direction = "stop"
-    cuadro.color("pink")
+    cuadro.color("green3")
     cuerpo.append(cuadro)
 
 #Funciones para la direccion
@@ -85,6 +85,19 @@ ventana.onkeypress(izquierda, "Left")
 while True:
     ventana.update()
 
+    #Interaccion bordes
+    if cabeza.xcor() > 240 or cabeza.xcor() < -240 or cabeza.ycor() > 240 or cabeza.ycor() < -240:
+        time.sleep(1)
+        cabeza.goto(0,0)
+        cabeza.direction = "stop"
+        manzana.goto(100,150)
+
+        #Eliminar cuerpo
+        for s in cuerpo:
+            s.goto(2000,2000)
+        #Eliminar de la lista
+        cuerpo.clear()
+
     if cabeza.direction != "stop":
         #Interraccion de la serpiente con las manzanas
         if cabeza.distance(manzana) < 40:
@@ -98,7 +111,7 @@ while True:
             ncuadro.shape("square")
             ncuadro.shapesize(stretch_wid=2, stretch_len=2) 
             ncuadro.penup()
-            ncuadro.color("pink")
+            ncuadro.color("green3")
             cuerpo.append(ncuadro)
             
         #Movimiento del cuerpo de la serpiente
@@ -114,6 +127,20 @@ while True:
             cuerpo[0].goto(x,y)
 
     mov()
+
+    #Colisiones con el cuerpo de la serpiente
+    for c in cuerpo:
+        if c.distance(cabeza) < 40:
+            time.sleep(0.5)
+            cabeza.goto(0,0)
+            cabeza.direction = "stop"
+            manzana.goto(100,150)
+
+            #Eliminar cuerpo
+            for k in cuerpo:
+                k.goto(2000,2000)
+                
+            cuerpo.clear()
     time.sleep(POSPONER)
 
 #Funcion para ejecutar la ventana
