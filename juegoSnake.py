@@ -212,19 +212,17 @@ def juego():
                 ncuadro.shapesize(stretch_wid=2, stretch_len=2) 
                 ncuadro.penup()
                 ncuadro.color("green3")
+                x = cuerpo[-1].xcor()
+                y = cuerpo[-1].ycor()
                 cuerpo.append(ncuadro)
+                ncuadro.goto(x,y)
                 
-            #Movimiento del cuerpo de la serpiente
-            cuadros = len(cuerpo)
-            for i in range(cuadros-1, 0, -1):
-                x = cuerpo[i-1].xcor()
-                y = cuerpo[i-1].ycor()
-                cuerpo[i].goto(x,y)
-
-            if cuadros>0:
-                x = cabeza.xcor()
-                y = cabeza.ycor()
-                cuerpo[0].goto(x,y)
+            #Movimiento del cuerpo de la serpiente          
+            x = cabeza.xcor()
+            y = cabeza.ycor()
+            c = cuerpo.pop()
+            cuerpo.insert(0,c)
+            c.goto(x,y)
 
         mov()
 
