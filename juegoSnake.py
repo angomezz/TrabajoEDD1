@@ -1,6 +1,7 @@
 import turtle
 import time
 import random
+from collections import deque
 
 import tkinter as tk
 
@@ -116,14 +117,14 @@ def juego():
                 break
 
     #Cuerpo de la serpiente
-    cuerpo = []
-    for i in range(1,3):
+    cuerpo = deque()
+    for i in range(-2,0):
         cuadro = turtle.Turtle()
         cuadro.speed(0)
         cuadro.shape("square")
         cuadro.shapesize(stretch_wid=2, stretch_len=2) 
         cuadro.penup()
-        cuadro.goto(0,-40*i)
+        cuadro.goto(0,40*i)
         cuadro.direction = "stop"
         cuadro.color("green3")
         cuerpo.append(cuadro)
@@ -190,13 +191,13 @@ def juego():
             #Muestra el mensaje de que perdio el juego
             mensaje_gameOver()
             
-            for i in range(1,3):
+            for i in range(-2,0):
                     cuadro = turtle.Turtle()
                     cuadro.speed(0)
                     cuadro.shape("square")
                     cuadro.shapesize(stretch_wid=2, stretch_len=2) 
                     cuadro.penup()
-                    cuadro.goto(0,-40*i)
+                    cuadro.goto(0,40*i)
                     cuadro.direction = "stop"
                     cuadro.color("green3")
                     cuerpo.append(cuadro)
@@ -220,8 +221,8 @@ def juego():
             #Movimiento del cuerpo de la serpiente          
             x = cabeza.xcor()
             y = cabeza.ycor()
-            c = cuerpo.pop()
-            cuerpo.insert(0,c)
+            c = cuerpo.popleft()
+            cuerpo.append(c)
             c.goto(x,y)
 
         mov()
@@ -242,13 +243,13 @@ def juego():
                 #Muestra el mensaje de que perdio el juego
                 mensaje_gameOver()
 
-                for i in range(1,3):
+                for i in range(-2,0):
                     cuadro = turtle.Turtle()
                     cuadro.speed(0)
                     cuadro.shape("square")
                     cuadro.shapesize(stretch_wid=2, stretch_len=2) 
                     cuadro.penup()
-                    cuadro.goto(0,-40*i)
+                    cuadro.goto(0,40*i)
                     cuadro.direction = "stop"
                     cuadro.color("green3")
                     cuerpo.append(cuadro)
