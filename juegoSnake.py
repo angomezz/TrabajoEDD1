@@ -97,6 +97,17 @@ while True:
             s.goto(2000,2000)
         #Eliminar de la lista
         cuerpo.clear()
+        
+        for i in range(1,3):
+                cuadro = turtle.Turtle()
+                cuadro.speed(0)
+                cuadro.shape("square")
+                cuadro.shapesize(stretch_wid=2, stretch_len=2) 
+                cuadro.penup()
+                cuadro.goto(0,-40*i)
+                cuadro.direction = "stop"
+                cuadro.color("green3")
+                cuerpo.append(cuadro)
 
     if cabeza.direction != "stop":
         #Interraccion de la serpiente con las manzanas
@@ -141,6 +152,17 @@ while True:
                 k.goto(2000,2000)
                 
             cuerpo.clear()
+            for i in range(1,3):
+                cuadro = turtle.Turtle()
+                cuadro.speed(0)
+                cuadro.shape("square")
+                cuadro.shapesize(stretch_wid=2, stretch_len=2) 
+                cuadro.penup()
+                cuadro.goto(0,-40*i)
+                cuadro.direction = "stop"
+                cuadro.color("green3")
+                cuerpo.append(cuadro)
+
     time.sleep(POSPONER)
 
 #Funcion para ejecutar la ventana
