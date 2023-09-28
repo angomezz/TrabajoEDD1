@@ -5,7 +5,7 @@ from collections import deque
 
 import tkinter as tk
 
-POSPONER = 1
+POSPONER = 0.1
 contador_movimientos = 0
 aleatorio=0
 
@@ -39,7 +39,7 @@ def informacion():
     ▶ Para inciar con el juego cierra esta ventana 
     dando clic en la ✘ superior
 
-    !Come la mayor cantidad de frijolitos que puedas¡
+    ¡Come la mayor cantidad de frijolitos que puedas!
     """
     parrafo = tk.Label(info, text=texto, font=("Arial", 12), justify="left")
     parrafo.pack(pady=10) 
@@ -253,8 +253,7 @@ def juego():
                 if contador_movimientos == aleatorio:
                     ubicarManzana()
 
-        mov() 
-        print(aleatorio," = ", contador_movimientos)
+        mov()
 
         #Colisiones con el cuerpo de la serpiente
         for c in list(cuerpo):
@@ -288,5 +287,5 @@ def juego():
     #Funcion para ejecutar la ventana
     ventana.mainloop()
 
-#informacion()
+informacion()
 juego()
