@@ -1,12 +1,12 @@
 import turtle
 import time
 import random
-from collections import deque
 
 import tkinter as tk
 
-POSPONER = 0.1
+POSPONER = 1
 contador_movimientos = 0
+aleatorio=0
 
 #Funcion para la ventana de informacion general
 def informacion():    
@@ -72,6 +72,7 @@ def mensaje_gameOver():
 
 #Funcion que ejecuta el juego
 def juego():
+    global aleatorio
     #Configuracion de la ventana principal
     ventana = turtle.Screen()
     ventana.title("Snake EDD")
@@ -119,20 +120,19 @@ def juego():
             if sobrep:
                 continue
             else:
-                manzana.goto(x,y)
-                manzana.showturtle()                
-                break
-
+                manzana.goto(x,y)              
+                break            
+         
 
     #Cuerpo de la serpiente
-    cuerpo = deque()
-    for i in range(-2,0):
+    cuerpo = []
+    for i in range(1,3):
         cuadro = turtle.Turtle()
         cuadro.speed(0)
         cuadro.shape("square")
         cuadro.shapesize(stretch_wid=2, stretch_len=2) 
         cuadro.penup()
-        cuadro.goto(0,40*i)
+        cuadro.goto(0,-40*i)
         cuadro.direction = "stop"
         cuadro.color("green3")
         cuerpo.append(cuadro)
@@ -210,23 +210,24 @@ def juego():
             #Muestra el mensaje de que perdio el juego
             mensaje_gameOver()
             
-            for i in range(-2,0):
+            for i in range(1,3):
                     cuadro = turtle.Turtle()
                     cuadro.speed(0)
                     cuadro.shape("square")
                     cuadro.shapesize(stretch_wid=2, stretch_len=2) 
                     cuadro.penup()
-                    cuadro.goto(0,40*i)
+                    cuadro.goto(0,-40*i)
                     cuadro.direction = "stop"
                     cuadro.color("green3")
                     cuerpo.append(cuadro)
 
         if cabeza.direction != "stop":
-            aleatorio=0
+            
             #Interraccion de la serpiente con las manzanas            
             if cabeza.distance(manzana) < 40 :
-                manzana.hideturtle()
+                manzana.goto(300,300)
                 aleatorio = random.randint(1, 10)
+                
 
                 ncuadro = turtle.Turtle()
                 ncuadro.speed(0)
@@ -242,16 +243,17 @@ def juego():
             #Movimiento del cuerpo de la serpiente          
             x = cabeza.xcor()
             y = cabeza.ycor()
-            c = cuerpo.popleft()
-            cuerpo.append(c)
+            c = cuerpo.pop()
+            cuerpo.insert(0,c)
             c.goto(x,y)
-        
-            if contador_movimientos == aleatorio:
-                ubicarManzana()
 
-        mov()
-        print("Contador de movimientos:", contador_movimientos)
+            coordenadas = manzana.pos()
+            if coordenadas[0] >= 300 and coordenadas[1] >= 300:
+                if contador_movimientos == aleatorio:
+                    ubicarManzana()
 
+        mov() 
+        print(aleatorio," = ", contador_movimientos)
 
         #Colisiones con el cuerpo de la serpiente
         for c in list(cuerpo):
@@ -269,13 +271,13 @@ def juego():
                 #Muestra el mensaje de que perdio el juego
                 mensaje_gameOver()
 
-                for i in range(-2,0):
+                for i in range(1,3):
                     cuadro = turtle.Turtle()
                     cuadro.speed(0)
                     cuadro.shape("square")
                     cuadro.shapesize(stretch_wid=2, stretch_len=2) 
                     cuadro.penup()
-                    cuadro.goto(0,40*i)
+                    cuadro.goto(0,-40*i)
                     cuadro.direction = "stop"
                     cuadro.color("green3")
                     cuerpo.append(cuadro)
