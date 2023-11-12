@@ -5,7 +5,7 @@ from collections import deque
 
 import tkinter as tk
 
-POSPONER = 0.1
+POSPONER = 0.08
 contador_movimientos = 0
 aleatorio=0
 
@@ -89,7 +89,7 @@ def juego():
     cabeza.penup()
     cabeza.goto(0,0)
     cabeza.direction = "stop"
-    cabeza.color("green4")
+    cabeza.color("SeaGreen1")
 
     #Manzanas para la serpiente
     manzana = turtle.Turtle()
