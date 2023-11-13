@@ -1,13 +1,14 @@
 from tkinter import *
 import subprocess
 from tkinter.font import Font
+from main import puntaje
+
 
 def ejecutar_main():
     v_principal.destroy()
     subprocess.run(["python", "main.py"])
 
 #variable para el puntaje
-puntaje=23
 
 v_principal = Tk()
 v_principal.config(bg='pink')

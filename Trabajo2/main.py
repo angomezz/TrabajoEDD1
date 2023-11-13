@@ -1,16 +1,13 @@
-# Juego Wordle
-# @autor: Magno Efren
-# Youtube: https://www.youtube.com/c/MagnoEfren
-
 
 from tkinter import  Tk, Button, Entry, Label, messagebox, PhotoImage
 from tkinter import  StringVar,Frame
 import random
 
+puntaje=0
+
 class Wordle(Frame):
 	def __init__(self, master):
 		super().__init__( master)
-		#self.conjunto_palabras = set()
 		self.fila = 0
 		self.verde = 'green3'
 		self.amarillo = 'gold'
@@ -69,12 +66,14 @@ class Wordle(Frame):
 		
 		if palabra in self.conjunto_palabras and len(palabra)==5:
 			self.alerta['text'] = ''
-			print(self.palabra_aleatoria, palabra)			
+			print(self.palabra_aleatoria, palabra)
+
 			if self.fila<=6:					
 				for i, letra in enumerate(palabra):
 					self.cuadros = Label(self.frame_cuadros, width=4,  fg='white' ,
 						bg=self.gris, text= letra, font=('Geometr706 BlkCn BT',25, 'bold'))
 					self.cuadros.grid(column=i, row = self.fila , padx =5, pady =5)
+
 					if letra == self.palabra_aleatoria[i]:
 						self.cuadros['bg']= self.verde
 
@@ -86,7 +85,9 @@ class Wordle(Frame):
 
 			self.fila = self.fila + 1
 			if self.fila<=6 and self.palabra_aleatoria == palabra:
+				puntaje += 1
 				messagebox.showinfo('GANASTE', 'FELICIDADES')
+				puntaje += 1
 				self.master.destroy()
 				self.master.quit()				
 			if self.fila==6 and self.palabra_aleatoria != palabra:
