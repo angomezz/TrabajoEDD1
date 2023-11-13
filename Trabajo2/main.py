@@ -20,22 +20,22 @@ class Wordle(Frame):
 		self.palabra_aleatoria()
 
 	def create_widgets(self):
-		self.frame_titulo = Frame(self.master, bg='red', width=400, height=100)
+		self.frame_titulo = Frame(self.master, bg='white', width=400, height=100)
 		self.frame_titulo.grid_propagate(0)
 		self.frame_titulo.grid(column=0, row=0, sticky='snew')
 
-		self.frame_cuadros = Frame(self.master, bg='pink', width=480, height=350)
+		self.frame_cuadros = Frame(self.master, bg='black', width=480, height=350)
 		self.frame_cuadros.grid_propagate(0)
 		self.frame_cuadros.grid(column=0, row=1, sticky='snew')
 
-		self.frame_control = Frame(self.master, bg='green', width=400, height=100)
+		self.frame_control = Frame(self.master, bg='lavender', width=400, height=100)
 		self.frame_control.grid_propagate(0)
 		self.frame_control.grid(column=0, row=2, sticky='snew')
 
-		Label(self.frame_titulo,  bg= 'black',fg='white', text= 'WORDLE', 
+		Label(self.frame_titulo,  bg= 'white',fg='black', text= 'WORDLE', 
 			font=('Arial',25,'bold')).pack(side='top')
 
-		self.alerta = Label(self.frame_control,  bg= 'black',fg='white', text= 'Señal', 
+		self.alerta = Label(self.frame_control,  bg= 'black',fg='white', text= 'Alarma', 
 			font=('Arial',12))
 		self.alerta.pack(side= 'left', expand=True)
 
