@@ -1,8 +1,9 @@
 from tkinter import *
 import subprocess
+from tkinter.font import Font
 
 def ejecutar_main():
-    v_principal.destroy() 
+    v_principal.destroy()
     subprocess.run(["python", "main.py"])
 
 #variable para el puntaje
@@ -10,33 +11,35 @@ puntaje=23
 
 v_principal = Tk()
 v_principal.config(bg='pink')
-v_principal.geometry('600x400')
+v_principal.geometry('600x400+40+40')
 v_principal.resizable(0, 0)
 v_principal.title('Pagina Principal')
 
 # Crear frame1
-frame1 = Frame(v_principal, width=600, height=70, bg="red")
+frame1 = Frame(v_principal, width=600, height=70, bg="SlateGray2")
 frame1.pack(side=TOP, fill=X)
 
 # Crear título centrado en frame1
-titulo = Label(frame1, text="TITULOTITULO")
+titulo = Label(frame1, text="JUEGO  WORDLE   2.0")
+titulo.config(font=Font(family="Georgia", size=16), bg="SlateGray2")
 titulo.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 #crear frame2
-frame2 = Frame(v_principal, width=600, height=230, bg="purple")
+frame2 = Frame(v_principal, width=600, height=230, bg="white")
 frame2.pack(side=TOP, fill=X)
 
 # descripcion
-descripcion = Label(frame2, text="Aqui va la decripcion del juego \n con niveles y explicacion \n de los colores")
-descripcion.place(relx=0.1, rely=0.3)
+descripcion = Label(frame2,bg="pink",width=45,font=Font(family="Verdana", size=10),
+                    text='''Descripcion: es un juego de palabras que tiene como \n objetivo adivinar una palabra. \n claves:\n verde: la letra esta en el lugar correcto \n amarillo: la letra esta en otra posicion \n gris: la letra no esta''')
+descripcion.place(relx=0.01, rely=0.2)
 
 # Tutulo del puntake
-titulo_puntaje = Label(frame2, text="Puntuacion total", width=15)
-titulo_puntaje.place(relx=0.6, rely=0.2)
+titulo_puntaje = Label(frame2, text="Puntuacion total", width=15, font=("Arial", 16))
+titulo_puntaje.place(relx=0.7, rely=0.2)
 
 #puntaje total(va cambiando)
-titulo_puntaje = Label(frame2, text=puntaje, width=15)
-titulo_puntaje.place(relx=0.6, rely=0.3)
+titulo_puntaje = Label(frame2, text=puntaje, width=15, font=("Arial", 16))
+titulo_puntaje.place(relx=0.7, rely=0.3)
 
 #crear frame3
 frame3 = Frame(v_principal, width=600, height=230, bg="gold")
