@@ -1,24 +1,14 @@
 
 from tkinter import  Tk, Button, Entry, Label, messagebox, PhotoImage
-from tkinter import  StringVar,Frame, Toplevel
-
+from tkinter import  StringVar,Frame
 import random
 
-class Wordle():
-	
-	def __init__(self, parent):
-		#super().__init__( master)
-		ventana = Toplevel(parent)
-		ventana.config(bg='black')
-		#ventana.call('wm', 'iconphoto', ventana._w, PhotoImage(file='logo.png'))
-		ventana.geometry('480x440+40+40')
-		ventana.resizable(0,0)
-		ventana.title('Wordle')
+puntaje=0
 
-		self.master = ventana
-
+class Wordle(Frame):
+	def __init__(self, master):
+		super().__init__( master)
 		self.fila = 0
-		self.puntaje = 7
 		self.verde = 'green3'
 		self.amarillo = 'gold'
 		self.gris = 'SlateGray3'
@@ -48,7 +38,7 @@ class Wordle():
 		self.alerta.pack(side= 'left', expand=True)
 
 		self.palabra = Entry(self.frame_control, font=('Arial',15), justify = 'center', 
-			textvariable = self.texto,fg='black',highlightcolor= "green2", highlightthickness=2, width=7)
+			textvariable = self.texto,fg='black',highlightcolor= "purple", highlightthickness=2, width=7)
 		self.palabra.pack(side= 'left', expand=True)
 
 		self.enviar = Button(self.frame_control, text= 'Enviar', bg='gray50',activebackground='green2',
@@ -66,21 +56,24 @@ class Wordle():
 	def palabra_aleatoria(self):
 		archivo = open('data.txt', 'r', encoding="utf-8")
 		self.conjunto_palabras = set(archivo.read().splitlines())
-		self.palabra_aleatoria = random.choice(list(self.conjunto_palabras))  
+		self.palabra_aleatoria = random.choice(list(self.conjunto_palabras))
+ 
 
 	def verificar_palabra(self):
 		palabra = self.texto.get().upper()
 
-		#x = list(filter(lambda x: palabra in x, self.lista)) #[i for i in lista if palabra in i]
-
+		#x = list(filter(lambda x: palabra in x, self.conjunto_palabras)) #[i for i in conjunto_palabras if palabra in i]
+		
 		if palabra in self.conjunto_palabras and len(palabra)==5:
 			self.alerta['text'] = ''
-			print(self.palabra_aleatoria, palabra)			
+			print(self.palabra_aleatoria, palabra)
+
 			if self.fila<=6:					
 				for i, letra in enumerate(palabra):
 					self.cuadros = Label(self.frame_cuadros, width=4,  fg='white' ,
 						bg=self.gris, text= letra, font=('Geometr706 BlkCn BT',25, 'bold'))
 					self.cuadros.grid(column=i, row = self.fila , padx =5, pady =5)
+
 					if letra == self.palabra_aleatoria[i]:
 						self.cuadros['bg']= self.verde
 
@@ -92,13 +85,15 @@ class Wordle():
 
 			self.fila = self.fila + 1
 			if self.fila<=6 and self.palabra_aleatoria == palabra:
-				#messagebox.showinfo('GANASTE', 'FELICIDADES')
-				self.puntaje += 3
-				self.master.destroy()		
-				
+				puntaje += 1
+				messagebox.showinfo('GANASTE', 'FELICIDADES')
+				puntaje += 1
+				self.master.destroy()
+				self.master.quit()				
 			if self.fila==6 and self.palabra_aleatoria != palabra:
 				messagebox.showinfo('PERDISTE', 'INTENTALO DE NUEVO')
 				self.master.destroy()
+				self.master.quit()
 		else:
 			self.alerta['text'] = 'No esta en BBDD'
 
