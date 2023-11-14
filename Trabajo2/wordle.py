@@ -1,4 +1,3 @@
-
 from tkinter import  Tk, Button, Entry, Label, messagebox, PhotoImage
 from tkinter import  StringVar,Frame
 from tkinter import *
@@ -8,6 +7,9 @@ from tkinter.font import Font
 
 
 class Wordle(Frame):
+	palabras = {4:'cuatro.txt', 5:'cinco.txt', 6:'seis.txt', 7:'siete.txt', 8:'ocho.txt'}
+	nLetras = 0
+ 
 	def __init__(self, master):
 		super().__init__( master)
 		self.fila = 0
@@ -53,11 +55,11 @@ class Wordle(Frame):
 		self.limpiar.pack(side= 'left', expand=True)
 
 	def limitar(self, texto):
-	    if len(texto.get()) > 0:
-	        texto.set(texto.get()[:5])
+		if len(texto.get()) > 0:
+			texto.set(texto.get()[:5])
 
 	def palabra_aleatoria(self):
-		archivo = open('data.txt', 'r', encoding="utf-8")
+		archivo = open(Wordle.palabras[nLetras], 'r', encoding="utf-8")
 		self.conjunto_palabras = set(archivo.read().splitlines())
 		self.palabra_aleatoria = random.choice(list(self.conjunto_palabras))
  
@@ -67,7 +69,7 @@ class Wordle(Frame):
 
 		#x = list(filter(lambda x: palabra in x, self.conjunto_palabras)) #[i for i in conjunto_palabras if palabra in i]
 		
-		if palabra in self.conjunto_palabras and len(palabra)==5:
+		if palabra in self.conjunto_palabras and len(palabra)==nLetras:
 			self.alerta['text'] = ''
 			print(self.palabra_aleatoria, palabra)
 
@@ -119,11 +121,13 @@ def juego():
 def inicio(puntaje):
 	resultado_juego = None
 
-	def ejecutar_juego():
+	def ejecutar_juego(letras):
 		
 		nonlocal resultado_juego
 		global puntaje_total
+		global nLetras
 
+		nLetras = letras
 		v_principal.destroy()
 		resultado_juego = juego()
 		print(resultado_juego)
@@ -175,19 +179,19 @@ def inicio(puntaje):
 	titulo_level.place(relx=0.02, rely=0.3)
 
 	#crear los 5 botones para los niveles
-	bot1=Button(frame3,  text="4 letras",bg="#80FF00", command=ejecutar_juego)
+	bot1=Button(frame3,  text="4 letras",bg="#80FF00", command=lambda:ejecutar_juego(4))
 	bot1.place(relx=0.2, rely=0.3)
 
-	bot2=Button(frame3,  text="5 letras",bg="#DCFF00")
+	bot2=Button(frame3,  text="5 letras",bg="#DCFF00", command=lambda:ejecutar_juego(5))
 	bot2.place(relx=0.35, rely=0.3)
 
-	bot3=Button(frame3,  text="6 letras", bg="#FFD500")
+	bot3=Button(frame3,  text="6 letras", bg="#FFD500", command=lambda:ejecutar_juego(6))
 	bot3.place(relx=0.5, rely=0.3)
 
-	bot4=Button(frame3,  text="7 letras", bg="#FF8700")
+	bot4=Button(frame3,  text="7 letras", bg="#FF8700", command=lambda:ejecutar_juego(7))
 	bot4.place(relx=0.65, rely=0.3)
 
-	bot5=Button(frame3,  text="8 letras", bg = "#FF2D00")
+	bot5=Button(frame3,  text="8 letras", bg = "#FF2D00", command=lambda:ejecutar_juego(8))
 	bot5.place(relx=0.8, rely=0.3)
 
 
