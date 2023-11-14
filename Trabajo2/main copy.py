@@ -86,11 +86,14 @@ class Wordle(Frame):
 			if self.fila<=6 and self.palabra_aleatoria == palabra:
 				messagebox.showinfo('GANASTE', 'FELICIDADES')
 				self.master.destroy()
-				self.master.quit()				
+				self.master.quit()	
+				print("se retorna 1")
+				return 1			
 			if self.fila==6 and self.palabra_aleatoria != palabra:
 				messagebox.showinfo('PERDISTE', 'INTENTALO DE NUEVO')
 				self.master.destroy()
 				self.master.quit()
+				return 0
 		else:
 			self.alerta['text'] = 'No esta en BBDD'
 
@@ -102,4 +105,6 @@ if __name__ == "__main__":
 	ventana.resizable(0,0)
 	ventana.title('Wordle')
 	app = Wordle(ventana)
+	r = app.verificar_palabra()
+	print(r)
 	app.mainloop()
