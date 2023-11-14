@@ -1,17 +1,24 @@
-# Juego Wordle
-# @autor: Magno Efren
-# Youtube: https://www.youtube.com/c/MagnoEfren
-
 
 from tkinter import  Tk, Button, Entry, Label, messagebox, PhotoImage
-from tkinter import  StringVar,Frame
+from tkinter import  StringVar,Frame, Toplevel
+
 import random
 
-class Wordle(Frame):
-	puntaje=0
-	def __init__(self, master):
-		super().__init__( master)
+class Wordle():
+	
+	def __init__(self, parent):
+		#super().__init__( master)
+		ventana = Toplevel(parent)
+		ventana.config(bg='black')
+		#ventana.call('wm', 'iconphoto', ventana._w, PhotoImage(file='logo.png'))
+		ventana.geometry('480x440+40+40')
+		ventana.resizable(0,0)
+		ventana.title('Wordle')
+
+		self.master = ventana
+
 		self.fila = 0
+		self.puntaje = 7
 		self.verde = 'green3'
 		self.amarillo = 'gold'
 		self.gris = 'SlateGray3'
@@ -85,21 +92,17 @@ class Wordle(Frame):
 
 			self.fila = self.fila + 1
 			if self.fila<=6 and self.palabra_aleatoria == palabra:
-				messagebox.showinfo('GANASTE', 'FELICIDADES')
-				Wordle.puntaje = Wordle.puntaje + 3
-				self.master.destroy()
-				self.master.quit()				
+				#messagebox.showinfo('GANASTE', 'FELICIDADES')
+				self.puntaje += 3
+				self.master.destroy()		
+				
 			if self.fila==6 and self.palabra_aleatoria != palabra:
 				messagebox.showinfo('PERDISTE', 'INTENTALO DE NUEVO')
 				self.master.destroy()
-				self.master.quit()
 		else:
 			self.alerta['text'] = 'No esta en BBDD'
 
 if __name__ == "__main__":
-
-
-
 	ventana = Tk()
 	ventana.config(bg='black')
 	ventana.call('wm', 'iconphoto', ventana._w, PhotoImage(file='logo.png'))
@@ -108,9 +111,3 @@ if __name__ == "__main__":
 	ventana.title('Wordle')
 	app = Wordle(ventana)
 	app.mainloop()
-
-	vprincipal = Tk()
-	vprincipal.title("Ventana con Label")
-	etiqueta = Label(vprincipal, text=app.puntaje)
-	etiqueta.pack()
-	vprincipal.mainloop()
