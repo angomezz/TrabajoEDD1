@@ -56,36 +56,38 @@ class Wordle(Frame):
 	        texto.set(texto.get()[:5])
 
 	def palabra_aleatoria(self):
-		archivo = open('data.txt','r',encoding="utf-8") #leer la Ñ
-		self.lista = archivo.readlines()
-		self.p_a =  random.choice(self.lista).rstrip('\n')  
+		archivo = open('data.txt', 'r', encoding="utf-8")
+		self.conjunto_palabras = set(archivo.read().splitlines())
+		self.palabra_aleatoria = random.choice(list(self.conjunto_palabras))  
 
 	def verificar_palabra(self):
 		palabra = self.texto.get().upper()
-		x = list(filter(lambda x: palabra in x, self.lista)) #[i for i in lista if palabra in i]
-		if len(x)==1 and len(palabra)==5:
+
+		#x = list(filter(lambda x: palabra in x, self.lista)) #[i for i in lista if palabra in i]
+
+		if palabra in self.conjunto_palabras and len(palabra)==5:
 			self.alerta['text'] = ''
-			print(self.p_a, palabra)			
+			print(self.palabra_aleatoria, palabra)			
 			if self.fila<=6:					
 				for i, letra in enumerate(palabra):
 					self.cuadros = Label(self.frame_cuadros, width=4,  fg='white' ,
 						bg=self.gris, text= letra, font=('Geometr706 BlkCn BT',25, 'bold'))
 					self.cuadros.grid(column=i, row = self.fila , padx =5, pady =5)
-					if letra == self.p_a[i]:
+					if letra == self.palabra_aleatoria[i]:
 						self.cuadros['bg']= self.verde
 
-					if letra in self.p_a and not letra== self.p_a[i]:
+					if letra in self.palabra_aleatoria and not letra== self.palabra_aleatoria[i]:
 						self.cuadros['bg']= self.amarillo
 
-					if letra not in self.p_a:
+					if letra not in self.palabra_aleatoria:
 						self.cuadros['bg']= self.gris
 
 			self.fila = self.fila + 1
-			if self.fila<=6 and self.p_a == palabra:
+			if self.fila<=6 and self.palabra_aleatoria == palabra:
 				messagebox.showinfo('GANASTE', 'FELICIDADES')
 				self.master.destroy()
 				self.master.quit()				
-			if self.fila==6 and self.p_a != palabra:
+			if self.fila==6 and self.palabra_aleatoria != palabra:
 				messagebox.showinfo('PERDISTE', 'INTENTALO DE NUEVO')
 				self.master.destroy()
 				self.master.quit()
