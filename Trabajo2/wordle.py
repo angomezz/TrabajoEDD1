@@ -43,7 +43,7 @@ class Wordle(Frame):
 		self.alerta.pack(side= 'left', expand=True)
 
 		self.palabra = Entry(self.frame_control, font=('Arial',15), justify = 'center', 
-			textvariable = self.texto,fg='black',highlightcolor= "purple", highlightthickness=2, width=7)
+			textvariable = self.texto,fg='black',highlightcolor= "purple", highlightthickness=2, width=Wordle.nLetras+2)
 		self.palabra.pack(side= 'left', expand=True)
 
 		self.enviar = Button(self.frame_control, text= 'Enviar', bg='gray50',activebackground='green2',
@@ -53,13 +53,14 @@ class Wordle(Frame):
 		self.limpiar = Button(self.frame_control, text= '⌫', bg='gray50',activebackground='green2',
 		 fg = 'white', font=('Arial', 12,'bold'), width=4, command= lambda:self.texto.set(''))
 		self.limpiar.pack(side= 'left', expand=True)
+  
 
 	def limitar(self, texto):
 		if len(texto.get()) > 0:
-			texto.set(texto.get()[:5])
+			texto.set(texto.get()[:Wordle.nLetras])
 
 	def palabra_aleatoria(self):
-		archivo = open(Wordle.palabras[nLetras], 'r', encoding="utf-8")
+		archivo = open(Wordle.palabras[Wordle.nLetras], 'r', encoding="utf-8")
 		self.conjunto_palabras = set(archivo.read().splitlines())
 		self.palabra_aleatoria = random.choice(list(self.conjunto_palabras))
  
@@ -69,13 +70,13 @@ class Wordle(Frame):
 
 		#x = list(filter(lambda x: palabra in x, self.conjunto_palabras)) #[i for i in conjunto_palabras if palabra in i]
 		
-		if palabra in self.conjunto_palabras and len(palabra)==nLetras:
+		if palabra in self.conjunto_palabras and len(palabra)==Wordle.nLetras:
 			self.alerta['text'] = ''
 			print(self.palabra_aleatoria, palabra)
 
 			if self.fila<=6:					
 				for i, letra in enumerate(palabra):
-					self.cuadros = Label(self.frame_cuadros, width=4,  fg='white' ,
+					self.cuadros = Label(self.frame_cuadros, width=9-(Wordle.nLetras),  fg='white' ,
 						bg=self.gris, text= letra, font=('Geometr706 BlkCn BT',25, 'bold'))
 					self.cuadros.grid(column=i, row = self.fila , padx =5, pady =5)
 
@@ -125,9 +126,8 @@ def inicio(puntaje):
 		
 		nonlocal resultado_juego
 		global puntaje_total
-		global nLetras
 
-		nLetras = letras
+		Wordle.nLetras = letras
 		v_principal.destroy()
 		resultado_juego = juego()
 		print(resultado_juego)
