@@ -66,6 +66,10 @@ class Wordle(Frame):
  
 
 	def verificar_palabra(self):
+		global puntaje_total
+		global aciertos
+		global fallos
+  
 		palabra = self.texto.get().upper()
 
 		#x = list(filter(lambda x: palabra in x, self.conjunto_palabras)) #[i for i in conjunto_palabras if palabra in i]
@@ -94,13 +98,18 @@ class Wordle(Frame):
 				self.resultado = 1
 				messagebox.showinfo('GANASTE', 'FELICIDADES')
 				self.master.destroy()
-				self.master.quit()	
+				self.master.quit()
+				puntaje_total += 6-self.fila
+				aciertos += 1
+				inicio(puntaje_total)    
 				print("se retorna 1")
 				
 			if self.fila==6 and self.palabra_aleatoria != palabra:
 				messagebox.showinfo('PERDISTE', 'INTENTALO DE NUEVO')
 				self.master.destroy()
 				self.master.quit()
+				fallos += 1
+				inicio(puntaje_total)
 				print("se retorna 0")
 				self.resultado = 0
 		else:
@@ -132,10 +141,10 @@ def inicio(puntaje):
 		resultado_juego = juego()
 		print(resultado_juego)
 
-		if resultado_juego == 1:
-			puntaje_total += 1  # Aumenta el puntaje total en 1
-			print("Puntaje total:", puntaje_total)
-			inicio(puntaje_total) 
+		#if resultado_juego == 1:
+			#puntaje_total += 1  # Aumenta el puntaje total en 1
+			#print("Puntaje total:", puntaje_total)
+			#inicio(puntaje_total) 
 
 
 	v_principal = Tk()
@@ -169,6 +178,18 @@ def inicio(puntaje):
 	#puntaje total(va cambiando)
 	titulo_puntaje = Label(frame2, text=puntaje, width=15, font=("Arial", 14))
 	titulo_puntaje.place(relx=0.65, rely=0.3)
+ 
+	titulo_aciertos = Label(frame2, text='Aciertos', width=15, font=("Arial", 14))
+	titulo_aciertos.place(relx=0.65, rely=0.5)
+ 
+	cantidad_aciertos = Label(frame2, text=aciertos, width=15, font=("Arial", 14))
+	cantidad_aciertos.place(relx=0.65, rely=0.6)
+ 
+	titulo_fallos = Label(frame2, text='Fallos', width=15, font=("Arial", 14))
+	titulo_fallos.place(relx=0.65, rely=0.8)
+ 
+	cantidad_fallos = Label(frame2, text=fallos, width=15, font=("Arial", 14))
+	cantidad_fallos.place(relx=0.65, rely=0.9)
 
 	#crear frame3
 	frame3 = Frame(v_principal, width=600, height=230, bg="white")
@@ -197,6 +218,8 @@ def inicio(puntaje):
 
 	v_principal.mainloop()
 
-inicio(12)
-puntaje_total=0
+aciertos = 0
+fallos = 0
+puntaje_total = 0
+inicio(0)
 
