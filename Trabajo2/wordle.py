@@ -80,7 +80,7 @@ class Wordle(Frame):
 
 			if self.fila<=6:					
 				for i, letra in enumerate(palabra):
-					self.cuadros = Label(self.frame_cuadros, width=9-(Wordle.nLetras),  fg='white' ,
+					self.cuadros = Label(self.frame_cuadros, width=9-(Wordle.nLetras) if Wordle.nLetras<8 else 2,  fg='white' ,
 						bg=self.gris, text= letra, font=('Geometr706 BlkCn BT',25, 'bold'))
 					self.cuadros.grid(column=i, row = self.fila , padx =5, pady =5)
 
