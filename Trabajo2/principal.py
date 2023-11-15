@@ -1,7 +1,7 @@
 from tkinter import *
 import subprocess
 from tkinter.font import Font
-from main import puntaje
+#from main import puntaje
 
 
 def ejecutar_main():
