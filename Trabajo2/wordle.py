@@ -171,7 +171,7 @@ def inicio(puntaje):
 						text='''Descripcion: es un juego de palabras que tiene como \n objetivo adivinar una palabra. \n claves:\n verde: la letra esta en el lugar correcto \n amarillo: la letra esta en otra posicion \n gris: la letra no esta''')
 	descripcion.place(relx=0.01, rely=0.2)
 
-	# Tutulo del puntake
+	# Tutulo del puntaje
 	titulo_puntaje = Label(frame2, text="Puntuacion total", width=15, font=("Arial", 14))
 	titulo_puntaje.place(relx=0.65, rely=0.2)
 
