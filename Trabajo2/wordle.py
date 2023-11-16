@@ -119,7 +119,7 @@ def juego():
 
 	ventana = Tk()
 	ventana.config(bg='black')
-	#ventana.call('wm', 'iconphoto', ventana._w, PhotoImage(file='logo.png'))
+	ventana.call('wm', 'iconphoto', ventana._w, PhotoImage(file='logo.png'))
 	ventana.geometry('480x440+40+40')
 	ventana.resizable(0,0)
 	ventana.title('Wordle')
