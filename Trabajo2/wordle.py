@@ -162,14 +162,23 @@ def inicio(puntaje):
 	titulo.config(font=Font(family="Georgia", size=16), bg="SlateGray2")
 	titulo.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-	#crear frame2
+	#crear frame2b
 	frame2 = Frame(v_principal, width=600, height=230, bg="white")
 	frame2.pack(side=TOP, fill=X)
 
 	# descripcion
 	descripcion = Label(frame2,bg="white",width=45,font=Font(family="Verdana", size=10),
-						text='''Descripcion: es un juego de palabras que tiene como \n objetivo adivinar una palabra. \n claves:\n verde: la letra esta en el lugar correcto \n amarillo: la letra esta en otra posicion \n gris: la letra no esta''')
-	descripcion.place(relx=0.01, rely=0.2)
+						text='''✦Descripcion✦ es un juego de palabras que tiene \n como objetivo adivinar una palabra''')
+	descripcion.place(relx=0.01, rely=0.1)
+
+	instrucciones = Label(frame2,bg="white",width=40,font=Font(family="Verdana", size=10),
+						text='''✦Claves✦\n Verde: la letra esta en el lugar correcto \n Amarillo: la letra esta en otra posicion \n Gris: la letra no esta''')
+	instrucciones.place(relx=0.01, rely=0.3)
+
+	info = Label(frame2,bg="white",width=40,font=Font(family="Verdana", size=10),
+						text='''✦Puntuacion✦\nLa puntuacion es deteminada por la cantidad de\n intentos usados para adivinar la palabra''')
+	info.place(relx=0.01, rely=0.7)
+	
 
 	# Tutulo del puntaje
 	titulo_puntaje = Label(frame2, text="Puntuacion total", width=15, font=("Arial", 14))
