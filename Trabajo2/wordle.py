@@ -71,8 +71,6 @@ class Wordle(Frame):
 		global fallos
   
 		palabra = self.texto.get().upper()
-
-		#x = list(filter(lambda x: palabra in x, self.conjunto_palabras)) #[i for i in conjunto_palabras if palabra in i]
 		
 		if palabra in self.conjunto_palabras and len(palabra)==Wordle.nLetras:
 			self.alerta['text'] = ''
@@ -99,7 +97,7 @@ class Wordle(Frame):
 				messagebox.showinfo('GANASTE', 'FELICIDADES')
 				self.master.destroy()
 				self.master.quit()
-				puntaje_total += 6-self.fila
+				puntaje_total += 7-self.fila
 				aciertos += 1
 				inicio(puntaje_total)    
 				print("se retorna 1")
@@ -141,13 +139,9 @@ def inicio(puntaje):
 		resultado_juego = juego()
 		print(resultado_juego)
 
-		#if resultado_juego == 1:
-			#puntaje_total += 1  # Aumenta el puntaje total en 1
-			#print("Puntaje total:", puntaje_total)
-			#inicio(puntaje_total) 
-
 
 	v_principal = Tk()
+	v_principal.call('wm', 'iconphoto', v_principal._w, PhotoImage(file='logo.png'))
 	v_principal.config(bg='pink')
 	v_principal.geometry('600x400+40+40')
 	v_principal.resizable(0, 0)
@@ -231,4 +225,3 @@ aciertos = 0
 fallos = 0
 puntaje_total = 0
 inicio(0)
-
