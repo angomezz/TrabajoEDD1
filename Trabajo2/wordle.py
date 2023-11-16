@@ -31,7 +31,7 @@ class Wordle(Frame):
 		self.frame_cuadros.grid_propagate(0)
 		self.frame_cuadros.grid(column=0, row=1, sticky='snew')
 
-		self.frame_control = Frame(self.master, bg='lavender', width=400, height=100)
+		self.frame_control = Frame(self.master, bg='black', width=400, height=100)
 		self.frame_control.grid_propagate(0)
 		self.frame_control.grid(column=0, row=2, sticky='snew')
 
@@ -46,12 +46,12 @@ class Wordle(Frame):
 			textvariable = self.texto,fg='black',highlightcolor= "purple", highlightthickness=2, width=Wordle.nLetras+2)
 		self.palabra.pack(side= 'left', expand=True)
 
-		self.enviar = Button(self.frame_control, text= 'Enviar', bg='gray50',activebackground='green2',
-		 fg = 'white', font=('Arial', 12,'bold'), command=self.verificar_palabra)
+		self.enviar = Button(self.frame_control, text= 'Enviar', bg='SkyBlue1',activebackground='green2',
+		 fg = 'black', font=('Arial', 12,'bold'), command=self.verificar_palabra)
 		self.enviar.pack(side= 'left', expand=True)
 
-		self.limpiar = Button(self.frame_control, text= '⌫', bg='gray50',activebackground='green2',
-		 fg = 'white', font=('Arial', 12,'bold'), width=4, command= lambda:self.texto.set(''))
+		self.limpiar = Button(self.frame_control, text= 'Borrar', bg='tan2',activebackground='green2',
+		 fg = 'black', font=('Arial', 12,'bold'), width=6, command= lambda:self.texto.set(''))
 		self.limpiar.pack(side= 'left', expand=True)
   
 
