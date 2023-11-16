@@ -100,7 +100,6 @@ class Wordle(Frame):
 				puntaje_total += 7-self.fila
 				aciertos += 1
 				inicio(puntaje_total)    
-				print("se retorna 1")
 				
 			if self.fila==6 and self.palabra_aleatoria != palabra:
 				messagebox.showinfo('PERDISTE', 'INTENTALO DE NUEVO')
@@ -108,7 +107,6 @@ class Wordle(Frame):
 				self.master.quit()
 				fallos += 1
 				inicio(puntaje_total)
-				print("se retorna 0")
 				self.resultado = 0
 		else:
 			self.alerta['text'] = 'No esta en BBDD'
@@ -137,7 +135,6 @@ def inicio(puntaje):
 		Wordle.nLetras = letras
 		v_principal.destroy()
 		resultado_juego = juego()
-		print(resultado_juego)
 
 
 	v_principal = Tk()
